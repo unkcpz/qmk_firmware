@@ -24,8 +24,8 @@ enum custom_keycodes {
 };
 
 enum layers {
-    MAC_BASE,
     LINUX_BASE,
+    Q_DVORAK_BASE,
     QWERT,
     _FN1,
     _FN2
@@ -35,28 +35,30 @@ enum layers {
 #define KC_FLXP LGUI(KC_E)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-/* Keymap 0: Basic Mac layer
+/* Keymap 0: Basic Dvorak Linux layer
+ * 
+ * The LCtrl behaves as regular without convert key to QWER layer when holding.
  *
  * ,------------------------------------------------------------------------------------------------------.
  * |  Esc   |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  |   [  |   ]  |   Bksp  |
  * |--------+------+------+------+------+------+------|------+------+------+------+------+----------------|
  * | Tab    |   '  |   ,  |   .  |   P  |   Y  |   F  |   G  |   C  |   R  |   L  |   /  |   =  |   \     |
  * |--------+------+------+------+------+------|---------------+------+------+------+------+--------------|
- * | Ctl(Q) |   A  |   O  |   E  |   U  |   I  |   D  |   H  |   T  |   N  |   S  |  -   |    Enter       |
+ * | LCtrl  |   A  |   O  |   E  |   U  |   I  |   D  |   H  |   T  |   N  |   S  |  -   |    Enter       |
  * |--------+------+------+------+------+------|-------------|------+------+------+------+------+---------|
  * |    LShift     |  :/; |   Q  |   J  |   K  |   X  |   B  |   M  |   W  |   V  |   Z  |    RShift      |
  * `--------+------+------+------+------+------------------+------+------+------+------+------------------'
- * | _FN1   | LOPT |  LCMD|                       Space                    | RCMD | _FN1 |  _FN2 |  RCtrl | 
+ * | _FN1   | LWin |  LAlt|                       Space                    | RAlt | _FN1 |  _FN2 |  RCtrl | 
  * `------------------------------------'-----------------------------------------------------------------.
  */
-    [MAC_BASE] = LAYOUT_ansi_61(
+    [LINUX_BASE] = LAYOUT_ansi_61(
         QK_GESC,   KC_1,     KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,     KC_LBRC,  KC_RBRC,  KC_BSPC,
         KC_TAB,   KC_QUOT,  KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L,     KC_SLSH,  KC_EQL,   KC_BSLS,
-        KC_LCTL,  KC_A,     KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S,     KC_MINS,             KC_ENT,
+        KC_LCTL,   KC_A,     KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S,     KC_MINS,             KC_ENT,
         KC_LSFT,            KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,        KC_Z,            KC_RSFT,
-        MO(_FN1), KC_LOPT,    CMD_Q,                            KC_SPC,                             KC_RCMD,  MO(_FN1), MO(_FN2), KC_CAPS
+        MO(_FN1), KC_LWIN,  KC_LALT,                            KC_SPC,                             KC_RALT,  MO(_FN1), MO(_FN2), KC_CAPS
     ),
-/* Keymap 1: Basic Linux layer
+/* Keymap 1: Basic Dvorak Linux layer with holding LCtrl to QWER layer
  *
  * ,------------------------------------------------------------------------------------------------------.
  * |  Esc   |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  |   [  |   ]  |   Bksp  |
@@ -70,14 +72,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | _FN1   | LWin |  LAlt|                       Space                    | RAlt | _FN1 |  _FN2 |  RCtrl | 
  * `------------------------------------'-----------------------------------------------------------------.
  */
-    [LINUX_BASE] = LAYOUT_ansi_61(
+    [Q_DVORAK_BASE] = LAYOUT_ansi_61(
         QK_GESC,   KC_1,     KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,     KC_LBRC,  KC_RBRC,  KC_BSPC,
         KC_TAB,   KC_QUOT,  KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L,     KC_SLSH,  KC_EQL,   KC_BSLS,
         CTRL_Q,   KC_A,     KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S,     KC_MINS,             KC_ENT,
         KC_LSFT,            KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,        KC_Z,            KC_RSFT,
         MO(_FN1), KC_LWIN,  KC_LALT,                            KC_SPC,                             KC_RALT,  MO(_FN1), MO(_FN2), KC_CAPS
     ),
-/* Keymap 2: Toggle activated QWERT layer
+/* Keymap 2: Toggle activated QWERT layer for ctrl (as hold) shortcuts
  *
  * ,------------------------------------------------------------------------------------------------------.
  * |        |      |      |      |      |      |      |      |      |      |      |      |      |         |
